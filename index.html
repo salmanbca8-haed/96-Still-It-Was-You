@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>96 (2018) — An Interactive Memory Journey & Digital Archive</title>
+  <meta name="description"
+    content="A cinematic, interactive memory museum and digital archive dedicated to the acclaimed 2018 Tamil film '96', starring Vijay Sethupathi and Trisha.">
+  <meta name="keywords"
+    content="96 movie, 96 Tamil movie, Vijay Sethupathi, Trisha, Ram and Jaanu, Govind Vasantha, Tamil cinema, Kaathalae Kaathalae, The Life of Ram">
+
+  <!-- OpenGraph / Social -->
+  <meta property="og:title" content="96 (2018) — An Interactive Memory Journey">
+  <meta property="og:description"
+    content="Some memories never grow old. Walk through Ram and Jaanu's nostalgic memories in this cinematic interactive experience.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23dfb15b'>96</text></svg>">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+
+  <!-- =========================================================================
+       Cinematic Preloader
+       ========================================================================= -->
+  <div id="preloader" class="preloader" aria-hidden="true">
+    <div class="preloader-content">
+      <div class="preloader-title">96</div>
+      <div class="preloader-subtitle">LOADING MEMORIES…</div>
+      <div class="preloader-progress-track">
+        <div id="preloader-progress" class="preloader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+  </div>
+
+  <!-- Ambient FX Canvases -->
+  <canvas id="particles-canvas" aria-hidden="true"></canvas>
+  <canvas id="grain-canvas" class="film-grain-canvas" aria-hidden="true"></canvas>
+  <div class="cinematic-vignette" aria-hidden="true"></div>
+
+  <!-- =========================================================================
+       Floating Navigation Bar
+       ========================================================================= -->
+  <header class="site-nav">
+    <div class="nav-brand">
+      <a href="#hero" class="nav-logo" id="nav-logo-link">96</a>
+      <span class="nav-tagline">MEMORY ARCHIVE</span>
+    </div>
+
+    <nav aria-label="Main Navigation">
+      <ul class="nav-links" id="nav-menu">
+        <li class="nav-link-item"><a href="#hero" class="active">MEMORY</a></li>
+        <li class="nav-link-item"><a href="#the-school">STORY</a></li>
+        <li class="nav-link-item"><a href="#memory-wall">3D WALL</a></li>
+        <li class="nav-link-item"><a href="#the-film">THE FILM</a></li>
+        <li class="nav-link-item"><a href="#archive">ARCHIVE</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="sound-toggle-btn" class="sound-btn playing" aria-label="Toggle Ambient Audio">
+        <div class="sound-bars" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <span id="sound-btn-text">♪ SOUND ON</span>
+      </button>
+      <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle Navigation Menu">☰</button>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- =======================================================================
+         PAGE 1: HERO SECTION
+         ======================================================================= -->
+    <section id="hero" class="hero-section">
+      <div class="hero-bg-container">
+        <img src="assets/images/hero_ram_jaanu.jpg" alt="Ram and Jaanu walking in the rainy Chennai night"
+          class="hero-bg-image ken-burns">
+        <div class="hero-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <span class="hero-tag">A FILM BY C. PREM KUMAR • 2018</span>
+        <h1 class="hero-title">96</h1>
+        <p class="hero-subtitle">“Some memories never grow old.”</p>
+      </div>
+
+      <div class="scroll-indicator" aria-hidden="true">
+        <span class="scroll-indicator-text">SCROLL TO REMEMBER ↓</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         FLOATING MEMORY CANVAS SECTION
+         ======================================================================= -->
+    <section id="floating-memories" class="floating-memory-section">
+      <div class="container memory-canvas-container">
+
+        <!-- Floating Statements Layer -->
+        <div class="floating-statements-layer" aria-hidden="true">
+          <div class="cinematic-statement">22 years.</div>
+          <div class="cinematic-statement highlight">One night.</div>
+          <div class="cinematic-statement">A lifetime of memories.</div>
+        </div>
+
+        <!-- Scattered Floating Photographs with Depth & Parallax -->
+        <div class="memory-photo-card animate-drift-a"
+          style="top: 8%; left: 6%; width: clamp(200px, 24vw, 320px); height: clamp(260px, 30vh, 400px); z-index: 12;"
+          data-speed="0.8" data-rot="-4">
+          <img src="assets/images/school_cycling_road_tanjore.jpg" alt="School cycling road Tanjore">
+          <div class="photo-caption-hover">
+            <div class="photo-caption-title">Tanjore School Days</div>
+            <div class="photo-caption-date">1996 • TANJORE</div>
+          </div>
+        </div>
+
+        <div class="memory-photo-card animate-drift-b"
+          style="top: 14%; right: 8%; width: clamp(220px, 26vw, 360px); height: clamp(280px, 32vh, 440px); z-index: 15;"
+          data-speed="0.6" data-rot="3">
+          <img src="assets/images/reunion_dinner.jpg" alt="Reunion table dinner">
+          <div class="photo-caption-hover">
+            <div class="photo-caption-title">Class of 1996 Reunion</div>
+            <div class="photo-caption-date">2018 • CHENNAI</div>
+          </div>
+        </div>
+
+        <div class="memory-photo-card animate-drift-a"
+          style="top: 42%; left: 14%; width: clamp(180px, 20vw, 280px); height: clamp(240px, 26vh, 360px); z-index: 10;"
+          data-speed="1.2" data-rot="5">
+          <img src="assets/images/ram_portrait.jpg" alt="Ram with camera">
+          <div class="photo-caption-hover">
+            <div class="photo-caption-title">Ram — The Wanderer</div>
+            <div class="photo-caption-date">2018 • PHOTOGRAPHER</div>
+          </div>
+        </div>
+
+        <div class="memory-photo-card animate-drift-b"
+          style="top: 46%; right: 12%; width: clamp(190px, 22vw, 300px); height: clamp(250px, 28vh, 380px); z-index: 11;"
+          data-speed="1.1" data-rot="-3">
+          <img src="assets/images/jaanu_portrait.jpg" alt="Jaanu in yellow dupatta">
+          <div class="photo-caption-hover">
+            <div class="photo-caption-title">Jaanu — The Melody</div>
+            <div class="photo-caption-date">2018 • SINGAPORE / CHENNAI</div>
+          </div>
+        </div>
+
+        <div class="memory-photo-card animate-drift-a"
+          style="top: 75%; left: 8%; width: clamp(210px, 25vw, 340px); height: clamp(240px, 26vh, 360px); z-index: 14;"
+          data-speed="0.5" data-rot="-2">
+          <img src="assets/images/vintage_camera.jpg" alt="Ram's vintage camera">
+          <div class="photo-caption-hover">
+            <div class="photo-caption-title">Analog Memories</div>
+            <div class="photo-caption-date">1996–2018 • 35MM FILM</div>
+          </div>
+        </div>
+
+        <div class="memory-photo-card animate-drift-b"
+          style="top: 78%; right: 6%; width: clamp(220px, 26vw, 360px); height: clamp(260px, 28vh, 380px); z-index: 13;"
+          data-speed="0.7" data-rot="4">
+          <img src="assets/images/her_memories.png" alt="The yellow dupatta cloth">
+          <div class="photo-caption-hover">
+            <div class="photo-caption-title">The Yellow Dupatta</div>
+            <div class="photo-caption-date">ETERNAL REPOSITORY</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SCROLL STORYTELLING CHAPTERS
+         ======================================================================= -->
+
+    <!-- CHAPTER 01: THE SCHOOL -->
+    <section id="the-school" class="story-chapter chapter-school">
+      <div class="container">
+        <div class="school-grid">
+          <div class="school-visual-stack">
+            <img src="assets/images/school_days.jpg" alt="School classroom Tanjore" class="school-main-image">
+            <div class="polaroid-frame school-sub-image">
+              <img src="assets/images/classroom_desk.jpg" alt="Classroom wooden bench">
+              <div class="polaroid-caption">Desk 1996</div>
+            </div>
+          </div>
+          <div class="school-narrative">
+            <span class="chapter-number">SECTION 01</span>
+            <h2 class="chapter-title">THE SCHOOL</h2>
+            <p class="chapter-desc">“Where everything began.”</p>
+            <p class="chapter-desc" style="margin-top: 16px; font-size: 1.1rem; color: var(--text-muted);">
+              A small village in Thanjavur. Morning bicycle rides under banyan trees, classroom benches carved with
+              unspoken feelings, and the melody of raindrops on tin roofs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02: THE REUNION -->
+    <section id="the-reunion" class="story-chapter chapter-reunion">
+      <div class="container">
+        <div class="reunion-grid">
+          <div class="reunion-narrative">
+            <span class="chapter-number">SECTION 02</span>
+            <h2 class="chapter-title">THE REUNION</h2>
+            <p class="chapter-desc">“After twenty-two years, one room holds all the unspoken words.”</p>
+            <p class="chapter-desc" style="margin-top: 16px; font-size: 1.1rem; color: var(--text-muted);">
+              Laughter of old classmates echoes through the warm Chennai restaurant. But amidst the chatter, two eyes
+              meet across the table—and the rest of the world fades into silence.
+            </p>
+          </div>
+          <div class="reunion-gallery-drift">
+            <div class="polaroid-frame reunion-photo-1">
+              <img src="assets/images/reunion_dinner.jpg" alt="1996 Batch Reunion Table">
+              <div class="polaroid-caption">Class of 1996 Batch Reunion • Chennai</div>
+            </div>
+            <div class="polaroid-frame reunion-photo-2">
+              <img src="assets/images/late_coffee_night.png" alt="Late night coffee">
+              <div class="polaroid-caption">Midnight Brew</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 03: RAM & JAANU (CONVERGING PARALLAX) -->
+    <section id="ram-and-jaanu" class="story-chapter chapter-converge">
+      <div class="container converge-container">
+        <span class="chapter-number">SECTION 03</span>
+        <h2 class="chapter-title">RAM &amp; JAANU</h2>
+
+        <div class="converge-stage">
+          <div class="converge-frame frame-ram">
+            <img src="assets/images/ram_portrait.jpg" alt="Ram portrait">
+          </div>
+          <div class="converge-frame frame-jaanu">
+            <img src="assets/images/jaanu_portrait.jpg" alt="Jaanu portrait">
+          </div>
+        </div>
+
+        <blockquote class="converge-quote">
+          “Some people leave your life.<br>Some memories never do.”
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- CHAPTER 04: THE NIGHT -->
+    <section id="section-night" class="story-chapter chapter-night">
+      <div class="rain-overlay"></div>
+      <div class="container">
+        <div class="night-content">
+          <div class="night-narrative">
+            <span class="chapter-number">SECTION 04</span>
+            <h2 class="chapter-title">THE NIGHT</h2>
+            <p class="chapter-desc">“A journey through the nocturnal streets of Chennai.”</p>
+            <p class="chapter-desc" style="margin-top: 16px; font-size: 1.1rem; color: var(--text-muted);">
+              From empty metro trains to late-night salon chairs and midnight filter coffee on wet asphalt. A single
+              night granted to relive a lifetime of lost tomorrows.
+            </p>
+          </div>
+          <div class="night-photo-grid">
+            <div class="polaroid-frame">
+              <img src="assets/images/metro_train.png" alt="Nocturnal Chennai Metro">
+              <div class="polaroid-caption">Midnight Metro</div>
+              <div class="polaroid-meta">1:15 AM • CHENNAI</div>
+            </div>
+            <div class="polaroid-frame">
+              <img src="assets/images/late_night_barber_shop.png" alt="Late night barber shop">
+              <div class="polaroid-caption">The Midnight Salon</div>
+              <div class="polaroid-meta">3:30 AM • T. NAGAR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 05: THE MEMORIES CONTINUOUS RIVER -->
+    <section id="section-river" class="chapter-river">
+      <div class="river-header">
+        <span class="chapter-number">SECTION 05</span>
+        <h2 class="chapter-title">THE MEMORIES</h2>
+        <p class="chapter-desc" style="margin: 0 auto; text-align: center;">Drifting photographs through the river of
+          time</p>
+      </div>
+
+      <div class="photo-river-wrapper">
+        <div class="river-item" data-title="Tanjore School Road 1996">
+          <img src="assets/images/school_cycling_road_tanjore.jpg" alt="School road Tanjore">
+        </div>
+        <div class="river-item" data-title="Western Ghats Solitude">
+          <img src="assets/images/travel_mountains.png" alt="Mountain misty landscape">
+        </div>
+        <div class="river-item" data-title="The Reunion Dinner">
+          <img src="assets/images/reunion_dinner.jpg" alt="Reunion table">
+        </div>
+        <div class="river-item" data-title="The Preserved Dupatta">
+          <img src="assets/images/her_memories.png" alt="Preserved memories">
+        </div>
+        <div class="river-item" data-title="Nocturnal Chennai Metro">
+          <img src="assets/images/metro_train.png" alt="Midnight metro train">
+        </div>
+        <div class="river-item" data-title="Early Dawn Farewell">
+          <img src="assets/images/airport_farewell.jpg" alt="Airport departure farewell">
+        </div>
+        <div class="river-item" data-title="Ram's 35mm Negatives">
+          <img src="assets/images/film_negatives.jpg" alt="Film rolls and negatives">
+        </div>
+        <div class="river-item" data-title="The Banyan Tree Pathway">
+          <img src="assets/images/childhood_tree.jpg" alt="Ancient tree pathway">
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         INTERACTIVE 3D "MEMORY WALL" (ROOM)
+         ======================================================================= -->
+    <section id="memory-wall" class="memory-wall-section">
+      <div class="memory-wall-header">
+        <span class="chapter-number">INTERACTIVE 3D SPACE</span>
+        <h2 class="chapter-title">THE MEMORY WALL</h2>
+        <p class="chapter-desc" style="font-size: 1.15rem;">
+          Step inside a three-dimensional room of floating photographs. Move your cursor to orbit through the atmosphere
+          and click any frame to inspect.
+        </p>
+      </div>
+
+      <div class="wall-3d-viewport" id="memory-wall-canvas-container">
+        <!-- Three.js Canvas injected dynamically -->
+      </div>
+
+      <div class="wall-hint" aria-hidden="true">
+        <span>✦ MOVE CURSOR TO EXPLORE SPACE • CLICK PHOTOGRAPHS TO INSPECT</span>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         MINIMALIST QUOTE SECTION
+         ======================================================================= -->
+    <section class="quote-section">
+      <div class="quote-bg">
+        <img src="assets/images/travel_mountains.png" alt="Misty hills background">
+      </div>
+      <div class="quote-content">
+        <p class="quote-text">
+          “Some memories are worth remembering forever.”
+        </p>
+        <span class="quote-author">— 96 (2018) • RAM &amp; JAANU</span>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         PAGE 2: “THE FILM” — SCENE EXPLORER & DIGITAL ARCHIVE
+         ======================================================================= -->
+    <section id="the-film" class="film-page-section">
+      <div class="container">
+
+        <div class="film-hero">
+          <span class="chapter-number">DIGITAL ARCHIVE &amp; TIMELINE</span>
+          <h2 class="film-hero-title">THE FILM</h2>
+          <p class="film-hero-subtitle">“A journey through Ram and Jaanu's memories.”</p>
+        </div>
+
+        <!-- Vertical Cinematic Scene Explorer -->
+        <div class="scene-timeline" id="scene-timeline">
+          <div class="timeline-track-line"></div>
+          <div class="timeline-progress-line" id="timeline-progress-line"></div>
+
+          <!-- Scene 1: School Days -->
+          <div class="timeline-item active">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-image-holder">
+                <img src="assets/images/school_days.jpg" alt="School Days in Tanjore">
+              </div>
+              <div class="timeline-card-body">
+                <div class="timeline-period">1994 – 1996 • TANJORE</div>
+                <h3 class="timeline-title">SCHOOL DAYS</h3>
+                <p class="timeline-text">
+                  Innocent high school days in Thanjavur. Cycle bells, classroom glances, rain on the path, and a love
+                  that needed no spoken declarations.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 2: Years Apart -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-image-holder">
+                <img src="assets/images/travel_mountains.png" alt="Years Apart Traveling">
+              </div>
+              <div class="timeline-card-body">
+                <div class="timeline-period">1996 – 2018 • THE WILDERNESS</div>
+                <h3 class="timeline-title">YEARS APART</h3>
+                <p class="timeline-text">
+                  Twenty-two years of solitude. Ram becomes a wanderer and wildlife photographer, carrying only his
+                  camera and preserved memories across mountains.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 3: The Reunion -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-image-holder">
+                <img src="assets/images/reunion_dinner.jpg" alt="Class of 1996 Reunion">
+              </div>
+              <div class="timeline-card-body">
+                <div class="timeline-period">2018 • CHENNAI EVENING</div>
+                <h3 class="timeline-title">THE REUNION</h3>
+                <p class="timeline-text">
+                  A WhatsApp group reunites the Class of 1996. Jaanu arrives from Singapore; Ram enters the room, and
+                  time freezes instantly.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 4: The Night -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-image-holder">
+                <img src="assets/images/mid_night_walk.jpg" alt="Midnight in Chennai">
+              </div>
+              <div class="timeline-card-body">
+                <div class="timeline-period">2018 • MIDNIGHT TO DAWN</div>
+                <h3 class="timeline-title">THE NIGHT</h3>
+                <p class="timeline-text">
+                  Walking through rain-washed Chennai streets, sitting in a 24-hour salon, sharing late-night tea, and
+                  unraveling 22 years of truth.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 5: The Journey -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-image-holder">
+                <img src="assets/images/late_coffee_night.png" alt="Coffee and conversations">
+              </div>
+              <div class="timeline-card-body">
+                <div class="timeline-period">2018 • 4:00 AM</div>
+                <h3 class="timeline-title">THE JOURNEY</h3>
+                <p class="timeline-text">
+                  Visiting Ram's modest apartment, looking through stacks of candid photography, and understanding why
+                  he never married.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 6: The Goodbye -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-image-holder">
+                <img src="assets/images/airport_farewell.jpg" alt="Airport Departure Farewell">
+              </div>
+              <div class="timeline-card-body">
+                <div class="timeline-period">2018 • EARLY DAWN</div>
+                <h3 class="timeline-title">THE GOODBYE</h3>
+                <p class="timeline-text">
+                  At the departure gate of Chennai International Airport. A final embrace, tears held back, and a yellow
+                  suitcase heading back into another life.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scene 7: The Memory -->
+          <div class="timeline-item">
+            <div class="timeline-node"></div>
+            <div class="timeline-card">
+              <div class="timeline-image-holder">
+                <img src="assets/images/her_memories.png" alt="The Folded Dupatta">
+              </div>
+              <div class="timeline-card-body">
+                <div class="timeline-period">ETERNAL • FOREVER</div>
+                <h3 class="timeline-title">THE MEMORY</h3>
+                <p class="timeline-text">
+                  The carefully folded yellow dupatta placed gently into Ram's wardrobe—a sanctuary of eternal love that
+                  time can never fade.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         SCATTERED EDITORIAL IMAGE ARCHIVE
+         ======================================================================= -->
+    <section id="archive" class="archive-section">
+      <div class="container">
+
+        <div class="archive-header">
+          <span class="chapter-number">VISUAL REPOSITORY</span>
+          <h2 class="film-hero-title">IMAGE ARCHIVE</h2>
+          <p class="film-hero-subtitle">“Moments etched in 35mm silver and memory.”</p>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-bar" role="tablist" aria-label="Archive Filters">
+          <button class="filter-btn active" data-filter="ALL">ALL</button>
+          <button class="filter-btn" data-filter="RAM">RAM</button>
+          <button class="filter-btn" data-filter="JAANU">JAANU</button>
+          <button class="filter-btn" data-filter="SCHOOL">SCHOOL</button>
+          <button class="filter-btn" data-filter="REUNION">REUNION</button>
+          <button class="filter-btn" data-filter="MEMORIES">MEMORIES</button>
+          <button class="filter-btn" data-filter="TRAVEL">TRAVEL</button>
+          <button class="filter-btn" data-filter="EMOTIONAL">EMOTIONAL</button>
+        </div>
+
+        <!-- Scattered Masonry Grid -->
+        <div class="scattered-masonry" id="archive-grid">
+
+          <!-- Card 1 -->
+          <div class="archive-card col-7 tall" data-category="ALL RAM JAANU EMOTIONAL"
+            data-desc="Ram and Jaanu walking hand-in-hand through rainy nocturnal Chennai." data-date="2018"
+            data-location="Chennai">
+            <img src="assets/images/mid_night_walk.jpg" alt="Ram and Jaanu Walking">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">RAM &amp; JAANU</span>
+              <h4 class="archive-title">Midnight Walk in Chennai</h4>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="archive-card col-5 standard" data-category="ALL SCHOOL MEMORIES"
+            data-desc="Tanjore village road bicycle memories in 1996 gentle rain." data-date="1996"
+            data-location="Tanjore">
+            <img src="assets/images/school_cycling_road_tanjore.jpg" alt="School Memories">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">SCHOOL DAYS</span>
+              <h4 class="archive-title">Bicycles in the Rain</h4>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="archive-card col-4 standard" data-category="ALL RAM"
+            data-desc="Ram sitting by the window with his trusted camera." data-date="2018"
+            data-location="Chennai Studio">
+            <img src="assets/images/ram_portrait.jpg" alt="Ram portrait">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">RAM</span>
+              <h4 class="archive-title">The Solitary Photographer</h4>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="archive-card col-4 standard" data-category="ALL JAANU EMOTIONAL"
+            data-desc="Jaanu wearing her iconic yellow silk kurta and dupatta." data-date="2018"
+            data-location="Chennai">
+            <img src="assets/images/jaanu_portrait.jpg" alt="Jaanu portrait">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">JAANU</span>
+              <h4 class="archive-title">The Yellow Dupatta</h4>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="archive-card col-4 standard" data-category="ALL REUNION"
+            data-desc="Class of 1996 batch reunion dinner table." data-date="2018" data-location="Restaurant, Chennai">
+            <img src="assets/images/reunion_dinner.jpg" alt="Reunion Table">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">REUNION</span>
+              <h4 class="archive-title">Class of 1996</h4>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="archive-card col-6 tall" data-category="ALL TRAVEL RAM"
+            data-desc="Wandering through misty mountain forests with telephoto lenses." data-date="2012"
+            data-location="Western Ghats">
+            <img src="assets/images/travel_mountains.png" alt="Western Ghats">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">TRAVEL</span>
+              <h4 class="archive-title">Solitude in the Hills</h4>
+            </div>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="archive-card col-6 tall" data-category="ALL EMOTIONAL"
+            data-desc="Early dawn goodbye at Chennai International Airport departure terminal." data-date="2018"
+            data-location="Airport Terminal">
+            <img src="assets/images/airport_farewell.jpg" alt="Airport Farewell">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">EMOTIONAL</span>
+              <h4 class="archive-title">The Departure Gate</h4>
+            </div>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="archive-card col-5 standard" data-category="ALL MEMORIES RAM"
+            data-desc="Ram's analog camera, 35mm film strips, and vintage lens collection." data-date="1996–2018"
+            data-location="Ram's Archive">
+            <img src="assets/images/vintage_camera.jpg" alt="Vintage Camera">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">MEMORIES</span>
+              <h4 class="archive-title">35mm Chronicles</h4>
+            </div>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="archive-card col-7 standard" data-category="ALL MEMORIES JAANU EMOTIONAL"
+            data-desc="The sacred yellow dupatta preserved tenderly inside the wooden closet." data-date="2018"
+            data-location="Chennai">
+            <img src="assets/images/her_memories.png" alt="Yellow Dupatta Cloth">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">MEMORIES</span>
+              <h4 class="archive-title">The Preserved Cloth</h4>
+            </div>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="archive-card col-4 standard" data-category="ALL SCHOOL MEMORIES"
+            data-desc="High school wooden bench carved with unspoken teenage emotions." data-date="1996"
+            data-location="Tanjore High School">
+            <img src="assets/images/classroom_desk.jpg" alt="Carved Classroom Desk">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">SCHOOL</span>
+              <h4 class="archive-title">Carved Wooden Bench</h4>
+            </div>
+          </div>
+
+          <!-- Card 11 -->
+          <div class="archive-card col-4 standard" data-category="ALL RAM JAANU EMOTIONAL"
+            data-desc="Late night quiet conversations under warm salon lights in T. Nagar." data-date="2018"
+            data-location="T. Nagar, Chennai">
+            <img src="assets/images/late_night_barber_shop.png" alt="Late Night Barber Shop">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">RAM &amp; JAANU</span>
+              <h4 class="archive-title">The Midnight Salon</h4>
+            </div>
+          </div>
+
+          <!-- Card 12 -->
+          <div class="archive-card col-4 standard" data-category="ALL RAM JAANU"
+            data-desc="Sitting side-by-side on the Chennai Metro as neon station lights blur past." data-date="2018"
+            data-location="Chennai Metro">
+            <img src="assets/images/metro_train.png" alt="Midnight Metro Train">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">RAM &amp; JAANU</span>
+              <h4 class="archive-title">Nocturnal Metro</h4>
+            </div>
+          </div>
+
+          <!-- Card 13 -->
+          <div class="archive-card col-6 standard" data-category="ALL MEMORIES EMOTIONAL"
+            data-desc="Vintage magnetic cassette tapes holding songs that defined their youth." data-date="1996"
+            data-location="Tanjore">
+            <img src="assets/images/cassette_tape.jpg" alt="Cassette Tape">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">MEMORIES</span>
+              <h4 class="archive-title">Ilaiyaraaja Cassettes</h4>
+            </div>
+          </div>
+
+          <!-- Card 14 -->
+          <div class="archive-card col-6 standard" data-category="ALL JAANU EMOTIONAL MEMORIES"
+            data-desc="Poetic reflections and memories that outlived twenty-two years of silence." data-date="2018"
+            data-location="Singapore / Chennai">
+            <img src="assets/images/quotes_for_her.png" alt="Quotes for Her">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">EMOTIONAL</span>
+              <h4 class="archive-title">Words Left Unspoken</h4>
+            </div>
+          </div>
+
+          <!-- Card 15 -->
+          <div class="archive-card col-12 wide" data-category="ALL SCHOOL MEMORIES TRAVEL"
+            data-desc="The sprawling banyan tree canopy where school bicycles paused after monsoon showers." data-date="1996"
+            data-location="Thanjavur Countryside">
+            <img src="assets/images/childhood_tree.jpg" alt="Ancient Banyan Pathway">
+            <div class="archive-overlay-info">
+              <span class="archive-tag">SCHOOL DAYS</span>
+              <h4 class="archive-title">The Ancient Banyan Pathway</h4>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       CINEMATIC FULLSCREEN LIGHTBOX MODAL
+       ========================================================================= -->
+  <div id="cinematic-lightbox" class="cinematic-lightbox" role="dialog" aria-modal="true"
+    aria-label="Cinematic Image Viewer">
+    <button id="lightbox-close-btn" class="lightbox-close-btn" aria-label="Close Lightbox">✕</button>
+    <button id="lightbox-prev-btn" class="lightbox-nav-btn lightbox-prev-btn"
+      aria-label="Previous Photograph">←</button>
+    <button id="lightbox-next-btn" class="lightbox-nav-btn lightbox-next-btn" aria-label="Next Photograph">→</button>
+
+    <div class="lightbox-container">
+      <div class="lightbox-visual">
+        <img id="lightbox-img" src="" alt="Cinematic Photograph">
+      </div>
+      <div class="lightbox-details">
+        <span id="lightbox-tag" class="lightbox-tag">CATEGORY</span>
+        <h3 id="lightbox-title" class="lightbox-title">Photograph Title</h3>
+        <p id="lightbox-desc" class="lightbox-desc">Photograph description.</p>
+        <div class="lightbox-meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">TIMELINE</div>
+            <div id="lightbox-meta-time" class="meta-item-value">2018</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">LOCATION</div>
+            <div id="lightbox-meta-loc" class="meta-item-value">Chennai, Tamil Nadu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-logo">96</div>
+      <p class="footer-quote">“Kaathalae Kaathalae, Enna Seidhai Ennai...”</p>
+      <p class="footer-credits">
+        Dedicated to the 2018 Tamil Cinema Classic directed by C. Prem Kumar • Music by Govind Vasantha • Starring Vijay
+        Sethupathi &amp; Trisha
+      </p>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       Scripts & Libraries (GSAP, ScrollTrigger, Lenis, Three.js)
+       ========================================================================= -->
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
+
+  <!-- Three.js for 3D Memory Wall -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- Modular Application Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/cursor.js"></script>
+  <script src="js/lightbox.js"></script>
+  <script src="js/memory-wall.js"></script>
+  <script src="js/scene-explorer.js"></script>
+  <script src="js/archive.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
